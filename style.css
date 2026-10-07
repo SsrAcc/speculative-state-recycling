@@ -236,6 +236,7 @@ section {
   padding: 2.6rem 1.25rem 0;
   scroll-margin-top: 4.6rem;
 }
+section:last-of-type { padding-bottom: 3.2rem; }
 h2 {
   margin: 0 0 0.85rem;
   font-family: "IBM Plex Serif", Georgia, serif;
