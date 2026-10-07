@@ -3,74 +3,239 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Speculative State Recycling</title>
-  <style>
-    :root {
-      --bg: #f6f5f1;
-      --ink: #1c1917;
-      --muted: #57534e;
-      --line: #d6d3d1;
-      --accent: #1d4e89;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Source Serif 4", "Times New Roman", Georgia, serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.55;
-    }
-    main {
-      max-width: 42rem;
-      margin: 0 auto;
-      padding: 4.5rem 1.25rem 5rem;
-    }
-    p.venue {
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 1rem;
-    }
-    h1 {
-      font-size: 1.85rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin: 0 0 1.25rem;
-      line-height: 1.25;
-    }
-    p.lead {
-      font-size: 1.05rem;
-      color: var(--muted);
-      margin: 0 0 2rem;
-    }
-    hr {
-      border: 0;
-      border-top: 1px solid var(--line);
-      margin: 0 0 2rem;
-    }
-    p { margin: 0 0 1rem; }
-    .note {
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-  </style>
+  <title>SSR: Speculative State Recycling for Flow-Based VLAs</title>
+  <meta name="description" content="Speculative State Recycling (SSR) improves the quality-efficiency trade-off of speculative inference for flow-based VLAs by recycling previously computed states.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <p class="venue">Project page</p>
-    <h1>Speculative State Recycling</h1>
-    <p class="lead">
-      A project page for an anonymous conference submission.
-      Materials will be added here without author-identifying information.
-    </p>
-    <hr>
-    <p>
-      This site will host paper figures, videos, and supplementary notes.
-    </p>
-    <p class="note">Placeholder page. Content coming soon.</p>
-  </main>
+  <nav class="nav">
+    <a class="brand" href="#top">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <linearGradient id="cardg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#115e59"/>
+            <stop offset="55%" stop-color="#14b8a6"/>
+            <stop offset="100%" stop-color="#67e8f9"/>
+          </linearGradient>
+          <linearGradient id="go" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#5eead4"/>
+            <stop offset="100%" stop-color="#fde047"/>
+          </linearGradient>
+        </defs>
+        <g class="trail">
+          <rect x="1.5" y="12" width="9.5" height="14" rx="1.6" transform="rotate(-30 6.2 19)" fill="#0f766e" opacity="0.32"/>
+          <rect x="5.5" y="10.5" width="10.5" height="15.5" rx="1.7" transform="rotate(-16 10.7 18.2)" fill="#0d9488" opacity="0.55"/>
+        </g>
+        <g transform="rotate(10 18 20)">
+          <rect x="10.2" y="8" width="14.2" height="21.2" rx="2.1" fill="url(#cardg)" stroke="#f0fdfa" stroke-width="1.15"/>
+          <path fill="#ecfeff" d="M13.4 12.1 15.2 9.6 17 12.1 15.2 14.6Z"/>
+          <path fill="#ecfeff" d="M17.4 23.6 19.2 21.1 21 23.6 19.2 26.1Z"/>
+        </g>
+        <g class="boost" fill="url(#go)">
+          <path d="M25.2 13.2 29.6 20 25.2 26.8 23.6 26.8 28 20 23.6 13.2Z"/>
+          <path d="M30.2 13.2 34.6 20 30.2 26.8 28.6 26.8 33 20 28.6 13.2Z"/>
+        </g>
+        <path class="spark" d="M35.8 7.4 36.7 9.5 38.9 10.4 36.7 11.3 35.8 13.4 34.9 11.3 32.7 10.4 34.9 9.5Z" fill="#fde047"/>
+      </svg>
+      Speculative State Recycling
+    </a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#videos">Real Robot</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <span class="badge">UNDER REVIEW</span>
+    <h1>Making Computation Count:<br>Speculative State Recycling for Flow-Based VLAs</h1>
+    <p class="authors">Anonymous Authors</p>
+    <p class="venue">Paper under double-blind review</p>
+    <div class="actions">
+      <a class="btn" href="https://openreview.net/pdf?id=CeYnTqMlWL" target="_blank" rel="noopener">Paper</a>
+      <a class="btn ghost disabled" aria-disabled="true">Code</a>
+    </div>
+  </header>
+
+  <section id="overview">
+    <h2>Overview</h2>
+    <figure class="figure">
+      <img src="assets/fig1.png" alt="Speculative State Recycling overview: speculative inference trade-off, semantic memory and proposal recovery, and real-world execution.">
+    </figure>
+    <h3 class="tagline">A Flow-VLA speculative system that recycles computed states to improve the quality–efficiency trade-off</h3>
+    <div class="highlights">
+      <article class="hl">
+        <h3>Output–cost analysis</h3>
+        <p>Measure speculative efficiency by executable action yield versus complete inference cost; discarded intermediate states are wasted compute.</p>
+      </article>
+      <article class="hl">
+        <h3>Speculative State Recycling</h3>
+        <p>Recycle retained semantic states for lightweight prediction and context-dependent refresh, and rejected proposals for short fresh-conditioned generation.</p>
+      </article>
+      <article class="hl">
+        <h3>Simulation and real-robot evaluation</h3>
+        <p>LIBERO: nearly matches compiled π<sub>0.5</sub> at <strong>1.89×</strong> per-action speedup. LIBERO-Plus: <strong>+5.77</strong> vs FLASH at +0.15 ms/action. Real Panda: better conveyor, whack-a-mole, and timed pick-and-place.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <div class="abstract">
+      <p>
+        Speculative inference accelerates flow-based vision-language-action models (Flow-VLAs) by bypassing vision-language model (VLM) prefill and full flow integration on speculative rounds. However, lightweight drafting and approximate verification can compromise action quality, while additional computation to improve reliability can erode the resulting speedup. Moreover, rejection can erase these savings by triggering full-path inference after the draft and verification costs have already been incurred. These limitations point to a broader inefficiency: speculative states are often discarded once they are no longer directly usable, even though they may still contain useful predictive information. We propose <strong>Speculative State Recycling (SSR)</strong>, which improves this quality–efficiency trade-off by recycling previously computed states across changes in conditioning. Before refresh, retained deep VLM features serve as semantic memory for a shallow predictor, augmenting the current observation with prior high-level representations. The same shallow computation also produces a draft-independent Context Risk estimate of how much refreshing the conditioning would change the full model’s actions, guiding execution and refresh. When refresh is needed, saved proposals initialize short fresh-conditioned Action Expert integration, reducing regeneration from noise. On LIBERO, SSR with Triton nearly matches the success rate of full-generation π<sub>0.5</sub> with compiled inference while achieving a 1.89× speedup per executed action and 74.1% fewer full AE calls per executed action. On LIBERO-Plus, SSR improves mean success by 5.77 points over FLASH at only 0.15 ms/action additional cost.
+      </p>
+    </div>
+  </section>
+
+  <section id="method">
+    <h2>Method</h2>
+    <figure class="figure">
+      <img src="assets/fig2.png" alt="SSR inference framework with memory-conditioned joint prediction and proposal recycling after rejection.">
+      <figcaption class="caption"><strong>Speculative State Recycling inference framework.</strong> Retained VLM features support memory-conditioned joint prediction of action proposals and Context Risk, which together with Action verification determines the executable prefix and refresh decision. After refresh, rejected proposals initialize short fresh-conditioned recovery, with full generation as fallback.</figcaption>
+    </figure>
+    <div class="steps">
+      <article class="step">
+        <h3><span class="num">1</span> Semantic memory — reuse stale VLM features</h3>
+        <p>Retained deep features condition a shallow joint drafter, so later rounds skip another full prefill.</p>
+      </article>
+      <article class="step">
+        <h3><span class="num">2</span> Context Risk — decide the executable prefix</h3>
+        <p>The same shallow pass estimates how much a refresh would change the teacher actions, and triggers refresh when needed.</p>
+      </article>
+      <article class="step">
+        <h3><span class="num">3</span> Proposal recovery — start from the rejected draft</h3>
+        <p>After refresh, the rejected proposal initializes short fresh-conditioned Action Expert integration instead of noise.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="videos">
+    <h2>Real-Robot Videos</h2>
+
+    <article class="task-block">
+      <div class="task-head">
+        <h3>Timed four-object pick-and-place (30s)</h3>
+        <p>Pick and place the mango, corn, sponge, and brush within 30 seconds.</p>
+      </div>
+      <div class="compare-row pair">
+        <div class="video-card">
+          <p class="clip-note fail">π<sub>0.5</sub> · fail (44s)</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/horizon_pi05.mp4"></video>
+        </div>
+        <div class="video-card">
+          <p class="clip-note ssr">SSR · success (27s)</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/horizon_ssr.mp4"></video>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-block">
+      <div class="task-head">
+        <h3>Conveyor-belt mango grasping</h3>
+        <p>Low / mid / high belt speeds. π<sub>0.5</sub> succeeds only at low speed; SSR succeeds at all three.</p>
+      </div>
+      <div class="compare-row">
+        <div class="row-label">Low</div>
+        <div class="video-card">
+          <p class="clip-note ok">π<sub>0.5</sub> · success</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/conveyor_pi05_low.mp4"></video>
+        </div>
+        <div class="video-card">
+          <p class="clip-note ssr">SSR · success</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/conveyor_ssr_low.mp4"></video>
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="row-label">Mid</div>
+        <div class="video-card">
+          <p class="clip-note fail">π<sub>0.5</sub> · fail</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/conveyor_pi05_mid.mp4"></video>
+        </div>
+        <div class="video-card">
+          <p class="clip-note ssr">SSR · success</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/conveyor_ssr_mid.mp4"></video>
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="row-label">High</div>
+        <div class="video-card">
+          <p class="clip-note fail">π<sub>0.5</sub> · fail</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/conveyor_pi05_high.mp4"></video>
+        </div>
+        <div class="video-card">
+          <p class="clip-note ssr">SSR · success</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/conveyor_ssr_high.mp4"></video>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-block">
+      <div class="task-head">
+        <h3>Whack-a-mole</h3>
+        <p>Low / high game speeds. Scores are the hit counts shown on the board.</p>
+      </div>
+      <div class="compare-row">
+        <div class="row-label">Low</div>
+        <div class="video-card">
+          <p class="clip-note">π<sub>0.5</sub> · score 4</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/whack_pi05_low_score4.mp4"></video>
+        </div>
+        <div class="video-card">
+          <p class="clip-note ssr">SSR · score 11</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/whack_ssr_low_score11.mp4"></video>
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="row-label">High</div>
+        <div class="video-card">
+          <p class="clip-note">π<sub>0.5</sub> · score 2</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/whack_pi05_high_score2.mp4"></video>
+        </div>
+        <div class="video-card">
+          <p class="clip-note ssr">SSR · score 6</p>
+          <video controls muted playsinline preload="auto" src="assets/videos/whack_ssr_high_score6.mp4"></video>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="bibtex">
+    <h2>BibTeX</h2>
+    <div class="bib-box">
+      <button class="copy" type="button" onclick="copyBib()">Copy</button>
+      <pre id="bib">@article{anonymous2027ssr,
+  title={Making Computation Count: Speculative State Recycling for Flow-Based VLAs},
+  author={Anonymous},
+  journal={OpenReview preprint},
+  year={2027}
+}</pre>
+    </div>
+  </section>
+
+  <footer>
+    Anonymous project page for double-blind review. Layout inspired by recent real-time VLA project sites.
+    Local preview only until the page is uploaded to GitHub Pages.
+  </footer>
+
+  <script>
+    function copyBib() {
+      const text = document.getElementById("bib").innerText;
+      const btn = document.querySelector(".copy");
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        setTimeout(function () {
+          btn.textContent = "Copy";
+          btn.classList.remove("copied");
+        }, 1600);
+      });
+    }
+  </script>
 </body>
 </html>
