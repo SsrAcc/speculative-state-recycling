@@ -110,7 +110,7 @@ h1 {
   font-weight: 600;
 }
 .authors {
-  margin: 0 0 2.35rem;
+  margin: 0 0 3.1rem;
   font-weight: 600;
   font-size: 1.05rem;
 }
@@ -126,9 +126,9 @@ h1 {
   gap: 0.45rem;
   padding: 0.58rem 1.05rem;
   border-radius: 999px;
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: white;
+  border: 1px solid #14532d;
+  background: #14532d;
+  color: #ecfdf5;
   font-weight: 600;
   font-size: 0.92rem;
 }
@@ -141,7 +141,8 @@ h1 {
 }
 .btn.ghost {
   background: white;
-  color: var(--ink);
+  color: #14532d;
+  border-color: #14532d;
 }
 .btn.disabled {
   opacity: 0.45;
